@@ -4,6 +4,12 @@ public class Product {
 
     public String name;
     public int rating;
-    public float price;
+    public double price;
+
+    public Product(String name, int rating, double price) {
+        this.name = name;
+        this.rating = rating;
+        this.price = price;
+    }
 
 }

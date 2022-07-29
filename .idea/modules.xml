@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/OnlineStore.iml" filepath="$PROJECT_DIR$/.idea/OnlineStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineStoreMavenQA/OnlineStoreMavenQA.iml" filepath="$PROJECT_DIR$/OnlineStoreMavenQA/OnlineStoreMavenQA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineStoreMavenQA/consoleApp/consoleApp.iml" filepath="$PROJECT_DIR$/OnlineStoreMavenQA/consoleApp/consoleApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineStoreMavenQA/domain/domain.iml" filepath="$PROJECT_DIR$/OnlineStoreMavenQA/domain/domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineStoreMavenQA/store/store.iml" filepath="$PROJECT_DIR$/OnlineStoreMavenQA/store/store.iml" />
+    </modules>
+  </component>
+</project>
