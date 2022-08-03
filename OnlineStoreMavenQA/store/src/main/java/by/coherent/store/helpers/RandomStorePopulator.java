@@ -22,12 +22,12 @@ public class RandomStorePopulator {
     private static Set<Category> createCategorySet() {
         Set<Category> categorySet = new HashSet<>();
         Reflections reflections = new Reflections("by.coherent.domain.category");
-        Set<Class<?>> subTypes =
-                reflections.get(SubTypes.of(Category.class).asClass());
+        Set<Class<? extends Category>> subTypes = reflections.getSubTypesOf(Category.class);
         for (Class<? extends Category> c : subTypes) {
             Category category = null;
             try {
                 category = c.getConstructor().newInstance();
+
             } catch (InstantiationException e) {
                 throw new RuntimeException(e);
             } catch (IllegalAccessException e) {

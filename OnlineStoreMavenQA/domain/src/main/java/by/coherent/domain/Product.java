@@ -12,4 +12,10 @@ public class Product {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        String productInfo = String.format("Name: %s, Price: %s, Rate: %s", name, price, rating);
+        return productInfo;
+    }
+
 }

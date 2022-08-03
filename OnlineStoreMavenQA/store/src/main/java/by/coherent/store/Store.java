@@ -14,12 +14,15 @@ public class Store {
         System.out.println("Initialized store");
     }
 
-    public void addCategory (Category category){
+    public void addCategory(Category category) {
         categoryList.add(category);
     }
-    public void printCategory(){
+
+    public void printCategoryAndProducts() {
+        for (Category category : categoryList) {
+            category.printAllProducts();
+        }
 
     }
-
 
 }

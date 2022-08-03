@@ -8,6 +8,7 @@ public class storeApp {
         Store onlineStore = new Store();
         RandomStorePopulator randomStorePopulator = new RandomStorePopulator(onlineStore);
         randomStorePopulator.populateProducts();
+        onlineStore.printCategoryAndProducts();
 
     }
 }

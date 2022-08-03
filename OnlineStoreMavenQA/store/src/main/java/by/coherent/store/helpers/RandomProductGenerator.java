@@ -20,10 +20,12 @@ public class RandomProductGenerator {
 
         }
     }
-    public int getRating (){
+
+    public int getRating() {
         return faker.number().numberBetween(0, 5);
     }
-    public double getPrice (){
-        return faker.number().randomDouble(2,1, 999);
+
+    public double getPrice() {
+        return faker.number().randomDouble(2, 1, 999);
     }
 }
