@@ -18,4 +18,14 @@ public class Product {
         return productInfo;
     }
 
+    public String getName(){
+        return this.name;
+    }
+    public int getRating(){
+        return this.rating;
+    }
+    public double getPrice(){
+        return this.price;
+    }
+
 }
