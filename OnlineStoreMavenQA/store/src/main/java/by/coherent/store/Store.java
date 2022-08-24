@@ -19,6 +19,10 @@ public class Store {
         categoryList.add(category);
     }
 
+    public List<Category> getCategories(){
+        return categoryList;
+    }
+
     public List<Product> getAllProducts(){
         List<Product> productList = new ArrayList<>();
         for (Category cat : categoryList){
