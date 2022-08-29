@@ -17,7 +17,6 @@ public class Category {
 
 
     public String getName() {
-        System.out.println(name);
         return this.name;
     }
 
@@ -32,5 +31,9 @@ public class Category {
         for (Product product : productList) {
             System.out.println(product.toString());
         }
+    }
+
+    public List<Product> getProductList(){
+        return this.productList;
     }
 }
