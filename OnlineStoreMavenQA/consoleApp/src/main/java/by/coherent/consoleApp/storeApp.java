@@ -2,14 +2,19 @@ package by.coherent.consoleApp;
 
 import by.coherent.XMLParser.ComparatorMethods;
 import by.coherent.domain.Product;
+import by.coherent.domain.ProductBuilder;
+import by.coherent.store.helpers.RandomProductGenerator;
 import by.coherent.store.helpers.RandomStorePopulator;
 import by.coherent.store.Store;
+import com.github.javafaker.Faker;
 
 import java.util.Scanner;
 
 public class storeApp {
+
     public static void main(String[] args) throws Exception {
-        Store onlineStore = new Store();
+        Faker faker = new Faker();
+        Store onlineStore = Store.getInstance();
         RandomStorePopulator randomStorePopulator = new RandomStorePopulator(onlineStore);
         randomStorePopulator.populateProducts();
         onlineStore.printCategoryAndProducts();
@@ -27,6 +32,16 @@ public class storeApp {
             } else {
                 System.out.println("Input is incorrect, Enter 'S' to sort by name,'T' for top 5, or 'Q' to exit");
             }
+            //Example for builder pattern, will refactor after review
+            ProductBuilder productBuilder = ProductBuilder.newBuilder().build()
+                    .setName(faker.leagueOfLegends().champion())
+                    .setPrice(faker.number().randomDouble(2,1, 2))
+                    .setRating(faker.number().numberBetween(1,6))
+                    .setAttributeOne(faker.leagueOfLegends().quote())
+                    .setAttributeTwo(faker.leagueOfLegends().quote());
+            System.out.println(productBuilder);
+
         }
     }
+
 }
