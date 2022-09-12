@@ -1,11 +1,12 @@
 package by.coherent.XMLParser;
 
 import by.coherent.domain.Category;
-import by.coherent.domain.Product;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import by.coherent.domain.Product;
 import by.coherent.store.*;
 
 public class ComparatorMethods {

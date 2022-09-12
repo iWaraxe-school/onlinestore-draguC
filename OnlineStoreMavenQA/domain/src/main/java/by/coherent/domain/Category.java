@@ -33,7 +33,7 @@ public class Category {
         }
     }
 
-    public List<Product> getProductList(){
+    public List<Product> getProductList() {
         return this.productList;
     }
 }

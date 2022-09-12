@@ -2,12 +2,13 @@ package by.coherent.consoleApp;
 
 import by.coherent.XMLParser.ComparatorMethods;
 import by.coherent.domain.Product;
-import by.coherent.domain.ProductBuilder;
-import by.coherent.store.helpers.RandomProductGenerator;
+import by.coherent.store.helpers.OrderCleaner;
+import by.coherent.store.helpers.OrderCreator;
 import by.coherent.store.helpers.RandomStorePopulator;
 import by.coherent.store.Store;
 import com.github.javafaker.Faker;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class storeApp {
@@ -19,7 +20,7 @@ public class storeApp {
         randomStorePopulator.populateProducts();
         onlineStore.printCategoryAndProducts();
         ComparatorMethods comparatorMethods = new ComparatorMethods();
-        System.out.println("Enter 'S' to sort by name,'T' for top 5, or 'Q' to exit");
+        System.out.println("Enter 'S' to sort by name,'T' for top 5, 'B' to simulate multiple orders or 'Q' to exit");
         while (true) {
             Scanner input = new Scanner(System.in);
             String userInput = input.next();
@@ -29,17 +30,21 @@ public class storeApp {
                 comparatorMethods.getTop5(onlineStore);
             } else if (userInput.equalsIgnoreCase("q")) {
                 System.exit(0);
+            } else if (userInput.equalsIgnoreCase("b")) {
+                int listMaxSize = onlineStore.getAllProducts().size();
+                Random random = new Random();
+                OrderCleaner orderCleaner = new OrderCleaner();
+                new Thread(orderCleaner).start();
+                while (true) {
+
+                    Product selectedProduct = onlineStore.getAllProducts().get(random.nextInt(listMaxSize));
+                    OrderCreator orderCreator = new OrderCreator(selectedProduct, random.nextInt(3) + 1);
+                    new Thread(orderCreator).start();
+                    Thread.sleep(10000);
+                }
             } else {
-                System.out.println("Input is incorrect, Enter 'S' to sort by name,'T' for top 5, or 'Q' to exit");
+                System.out.println("Input is incorrect, Enter 'S' to sort by name,'T' for top 5, 'B' to simulate multiple orders or 'Q' to exit");
             }
-            //Example for builder pattern, will refactor after review
-            ProductBuilder productBuilder = ProductBuilder.newBuilder().build()
-                    .setName(faker.leagueOfLegends().champion())
-                    .setPrice(faker.number().randomDouble(2,1, 2))
-                    .setRating(faker.number().numberBetween(1,6))
-                    .setAttributeOne(faker.leagueOfLegends().quote())
-                    .setAttributeTwo(faker.leagueOfLegends().quote());
-            System.out.println(productBuilder);
 
         }
     }

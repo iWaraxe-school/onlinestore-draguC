@@ -10,8 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.reflections.scanners.Scanners.SubTypes;
-
 public class RandomStorePopulator {
     Store store;
 
@@ -47,13 +45,12 @@ public class RandomStorePopulator {
         RandomProductGenerator populator = new RandomProductGenerator();
         Set<Category> categorySet = createCategorySet();
         for (Category category : categorySet) {
-
             this.store.addCategory(category);
             for (int i = 0; i < 3; i++) {
-                Product product = new Product(
-                        populator.getProductName(category.getName()),
-                        populator.getRating(),
-                        populator.getPrice());
+                Product product = Product.newBuilder().build()
+                        .setName(populator.getProductName(category.getName()))
+                        .setPrice(populator.getPrice())
+                        .setRating(populator.getRating());
                 category.addProduct(product);
             }
 
