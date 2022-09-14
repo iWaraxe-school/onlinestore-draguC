@@ -8,18 +8,20 @@ import java.util.List;
 
 
 public class Store {
-    private static Store uniqueInstance = null;
+    public List<Product> PurchasedProducts = new ArrayList<>();
     private List<Category> categoryList = new ArrayList<>();
 
     private Store() {
-
         System.out.println("Initialized store");
     }
 
-    public static synchronized Store getInstance() {
-        if (uniqueInstance == null)
-            uniqueInstance = new Store();
-        return uniqueInstance;
+    private static class SingletonHelper{
+        private static final Store UNIQUE_INSTANCE = new Store();
+    }
+
+    public static Store getInstance() {
+        return SingletonHelper.UNIQUE_INSTANCE;
+
     }
 
     public void addCategory(Category category) {
