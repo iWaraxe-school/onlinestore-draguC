@@ -10,15 +10,17 @@ import com.github.javafaker.Faker;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class storeApp {
 
     public static void main(String[] args) throws Exception {
-        Faker faker = new Faker();
         Store onlineStore = Store.getInstance();
         RandomStorePopulator randomStorePopulator = new RandomStorePopulator(onlineStore);
         randomStorePopulator.populateProducts();
         onlineStore.printCategoryAndProducts();
+        Timer timer =  new Timer();
+        timer.schedule(new OrderCleaner(),0,120000);
         ComparatorMethods comparatorMethods = new ComparatorMethods();
         System.out.println("Enter 'S' to sort by name,'T' for top 5, 'B' to simulate multiple orders or 'Q' to exit");
         while (true) {
@@ -33,8 +35,7 @@ public class storeApp {
             } else if (userInput.equalsIgnoreCase("b")) {
                 int listMaxSize = onlineStore.getAllProducts().size();
                 Random random = new Random();
-                OrderCleaner orderCleaner = new OrderCleaner();
-                new Thread(orderCleaner).start();
+
                 while (true) {
 
                     Product selectedProduct = onlineStore.getAllProducts().get(random.nextInt(listMaxSize));
