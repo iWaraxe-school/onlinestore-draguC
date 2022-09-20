@@ -6,6 +6,7 @@ import by.coherent.store.helpers.OrderCleaner;
 import by.coherent.store.helpers.OrderCreator;
 import by.coherent.store.helpers.RandomStorePopulator;
 import by.coherent.store.Store;
+import by.coherent.store.helpers.SQLCommands;
 import com.github.javafaker.Faker;
 
 import java.util.Random;
@@ -19,7 +20,9 @@ public class storeApp {
         RandomStorePopulator randomStorePopulator = new RandomStorePopulator(onlineStore);
         randomStorePopulator.populateProducts();
         onlineStore.printCategoryAndProducts();
-        Timer timer =  new Timer();
+        SQLCommands.populateProductsTable();
+        SQLCommands.returnProductsTable();
+/*        Timer timer =  new Timer();
         timer.schedule(new OrderCleaner(),0,120000);
         ComparatorMethods comparatorMethods = new ComparatorMethods();
         System.out.println("Enter 'S' to sort by name,'T' for top 5, 'B' to simulate multiple orders or 'Q' to exit");
@@ -47,7 +50,7 @@ public class storeApp {
                 System.out.println("Input is incorrect, Enter 'S' to sort by name,'T' for top 5, 'B' to simulate multiple orders or 'Q' to exit");
             }
 
-        }
+        }*/
     }
 
 }
