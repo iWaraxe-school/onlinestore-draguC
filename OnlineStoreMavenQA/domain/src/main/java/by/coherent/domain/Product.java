@@ -6,8 +6,7 @@ public class Product {
     private String name;
     private int rating;
     private double price;
-    private String attributeOne;
-    private String attributeTwo;
+
 
     public static Builder newBuilder() {
         return new Product().new Builder();

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Store {
     public List<Product> PurchasedProducts = new ArrayList<>();
-    private List<Category> categoryList = new ArrayList<>();
+    private static List<Category> categoryList = new ArrayList<>();
 
     private Store() {
         System.out.println("Initialized store");
@@ -24,7 +24,7 @@ public class Store {
 
     }
 
-    public void addCategory(Category category) {
+    public static void addCategory(Category category) {
         categoryList.add(category);
     }
 

@@ -22,7 +22,7 @@ public class RandomProductGenerator {
     }
 
     public int getRating() {
-        return faker.number().numberBetween(0, 5);
+        return faker.number().numberBetween(0, 100);
     }
 
     public double getPrice() {
