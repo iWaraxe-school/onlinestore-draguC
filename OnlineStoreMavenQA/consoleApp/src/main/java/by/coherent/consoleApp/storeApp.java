@@ -1,19 +1,16 @@
 package by.coherent.consoleApp;
 
-import by.coherent.XMLParser.ComparatorMethods;
-import by.coherent.domain.Product;
-import by.coherent.store.helpers.OrderCleaner;
-import by.coherent.store.helpers.OrderCreator;
-import by.coherent.store.helpers.RandomStorePopulator;
+import by.coherent.store.helpers.*;
 import by.coherent.store.Store;
-import by.coherent.store.helpers.SQLCommands;
-import com.github.javafaker.Faker;
+import com.sun.net.httpserver.BasicAuthenticator;
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpServer;
 
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Timer;
+import java.net.InetSocketAddress;
 
 public class storeApp {
+    static final int port = 9000;
+
 
     public static void main(String[] args) throws Exception {
         Store onlineStore = Store.getInstance();
@@ -21,7 +18,41 @@ public class storeApp {
         randomStorePopulator.populateProducts();
         onlineStore.printCategoryAndProducts();
         SQLCommands.populateProductsTable();
+        SQLCommands.populateCategoryTable();
         SQLCommands.returnProductsTable();
+        //SQLCommands.returnCategoryTable();
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        System.out.println("server started at " + port);
+        server.createContext("/", new RootHandler());
+        server.createContext("/echoHeader", new HeaderHandler());
+        HttpContext get = server.createContext("/GetCategories", new CategoryGetHandler());
+        HttpContext post = server.createContext("/PostProduct", new ProductPostHandler());
+        get.setAuthenticator(new BasicAuthenticator("/GetCategories") {
+
+            @Override
+
+            public boolean checkCredentials(String user, String pwd) {
+
+                return user.equals("admin") && pwd.equals("password");
+
+            }
+
+        });
+        post.setAuthenticator(new BasicAuthenticator("/PostProduct") {
+
+            @Override
+
+            public boolean checkCredentials(String user, String pwd) {
+
+                return user.equals("admin") && pwd.equals("password");
+
+            }
+
+        });
+
+        server.setExecutor(null);
+        server.start();
+        //SQLCommands.returnProductsTable();
 /*        Timer timer =  new Timer();
         timer.schedule(new OrderCleaner(),0,120000);
         ComparatorMethods comparatorMethods = new ComparatorMethods();
@@ -54,3 +85,4 @@ public class storeApp {
     }
 
 }
+
